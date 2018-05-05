@@ -23,9 +23,10 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');
 
 
-
-Route::get('poem', 'PoemController@index');
-Route::get('poem/{poem}', 'PoemController@show');
-Route::post('poem', 'PoemController@store');
-Route::put('poem/{poem}', 'PoemController@update');
-Route::delete('poem/{poem}', 'PoemController@delete');
+Route::group(['middleware' => 'auth:api'], function() {
+	Route::get('poem', 'PoemController@index');
+	Route::get('poem/{poem}', 'PoemController@show');
+	Route::post('poem', 'PoemController@store');
+	Route::put('poem/{poem}', 'PoemController@update');
+	Route::delete('poem/{poem}', 'PoemController@delete');
+});

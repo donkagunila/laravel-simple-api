@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::prefix('poem')->group(function ()
+{
+	Route::get('/', 'PoemController@index')->name('poem');
+	Route::get('/{poem}', 'PoemController@show')->name('poem.show');
+});
